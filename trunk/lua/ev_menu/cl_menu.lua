@@ -2,6 +2,8 @@
 	Clientside menu framework
 -------------------------------------------------------------------------------------------------------------------------*/
 
+include( "tab_players_controls.lua" )
+
 evolve.MENU = {}
 local MENU = evolve.MENU
 MENU.Tabs = {}
@@ -19,7 +21,7 @@ function evolve:RegisterTab( tab )
 	tab:Initialize( tab.Panel )
 	tab:Update()
 
-	MENU.TabContainer:AddSheet( tab.Title, tab.Panel, tab.Icon, false, false, tab.Description )
+	--MENU.TabContainer:AddSheet( tab.Title, tab.Panel, tab.Icon, false, false, tab.Description )
 	table.insert( MENU.Tabs, tab )
 end
 
@@ -85,8 +87,8 @@ function MENU:Think()
 		end
 
 		if ( activeTab ) then
-			local w = self.TabContainer:GetWide() + ( ( activeTab.Width or 260 ) + 10 - self.TabContainer:GetWide() ) / 5
-			if ( math.abs( w - ( activeTab.Width or 260 ) ) < 5 ) then w = ( activeTab.Width or 260 ) + 10 end
+			local w = self.TabContainer:GetWide() + ( ( activeTab.Width + 6 or 260 ) + 10 - self.TabContainer:GetWide() ) / 5
+			if ( math.abs( w - ( activeTab.Width + 6 or 260 ) ) < 5 ) then w = ( activeTab.Width + 6 or 260 ) + 10 end
 			self.Panel:SetWide( w )
 			self.TabContainer:SetWide( w )
 		end
@@ -102,6 +104,12 @@ end )
 function MENU:Show()
 	if ( !LocalPlayer():EV_HasPrivilege( "Menu" ) ) then return end
 	if ( !self.Panel ) then MENU:Initialize() end
+
+	table.SortByMember( self.Tabs, "Sort", true )
+
+	for _, tab in ipairs( self.Tabs ) do
+		self.TabContainer:AddSheet( tab.Title, tab.Panel, tab.Icon, false, false, tab.Description )
+	end
 
 	for _, tab in ipairs( MENU.Tabs ) do
 		tab:Update()

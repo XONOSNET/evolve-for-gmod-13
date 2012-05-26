@@ -5,10 +5,11 @@
 local TAB = {}
 TAB.Title = "Sandbox"
 TAB.Description = "Manage sandbox settings."
-TAB.Icon = "gui/silkicons/world"
+TAB.Icon = "icon16/world.png"
 TAB.Author = "Overv"
 TAB.Width = 520
 TAB.Privileges = { "Sandbox menu" }
+TAB.Sort = 3
 
 TAB.Limits = {
 	{ "sbox_maxprops", "Props" },
@@ -33,10 +34,12 @@ TAB.ConVars = {
 	{ "sbox_noclip", "Noclip" },
 	{ "sbox_plpldamage", "No player damage" },
 	{ "sbox_weapons", "Weapons" },
-	{ "g_ragdoll_maxcount", "Keep NPC bodies", 8 }
+	{ "g_ragdoll_maxcount", "Keep NPC bodies", 8 },
+	{ "sbox_ev_scoreboard", "Evolve Scoreboard" }
 }
 TAB.ConVarSliders = {}
 TAB.ConVarCheckboxes = {}
+
 function TAB:ApplySettings()
 	for _, v in pairs( self.ConVarSliders ) do
 		if ( GetConVar( v.ConVar ):GetInt() != v:GetValue() ) then
@@ -92,6 +95,9 @@ function TAB:Initialize( pnl )
 			cvSlider:SetDecimals( 0 )
 			cvSlider:SetValue( GetConVar( cv[1] ):GetInt() )
 			cvSlider.ConVar = cv[1]
+			
+			cvSlider.Label:SetDark( true )
+
 			self.LimitsContainer:AddItem( cvSlider )
 		
 			table.insert( self.ConVarSliders, cvSlider )
@@ -111,6 +117,7 @@ function TAB:Initialize( pnl )
 			local cvCheckbox = vgui.Create( "DCheckBoxLabel", self.Settings )
 			cvCheckbox:SetText( cv[2] )
 			cvCheckbox:SetWide( self.Settings:GetWide() - 15 )
+			cvCheckbox.Label:SetDark( true )
 			cvCheckbox:SetValue( GetConVar( cv[1] ):GetInt() > 0 )
 			cvCheckbox.ConVar = cv[1]
 			cvCheckbox.OnValue = cv[3]
