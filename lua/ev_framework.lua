@@ -25,7 +25,7 @@ evolve.category.actions = 2
 evolve.category.punishment = 3
 evolve.category.teleportation = 4
 evolve.plugins = {}
-evolve.version = 177
+evolve.version = 183
 
 /*-------------------------------------------------------------------------------------------------------------------------
 	Messages and notifications
@@ -726,7 +726,7 @@ usermessage.Hook( "EV_Rank", function( um )
 		evolve.ranks[id].Color = Color( um:ReadShort(), um:ReadShort(), um:ReadShort() )
 	end
 
-	evolve.ranks[id].IconTexture = surface.GetTextureID( "icon16/" .. evolve.ranks[id].Icon ..".png" )
+	evolve.ranks[id].IconTexture = Material( "icon16/" .. evolve.ranks[id].Icon ..".png" )
 
 	if ( created ) then
 		hook.Call( "EV_RankCreated", nil, id )
