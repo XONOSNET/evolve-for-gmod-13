@@ -2,7 +2,7 @@
 	Default custom scoreboard
 -------------------------------------------------------------------------------------------------------------------------*/
 
-resource.AddFile( "materials/gui/scoreboard_headerbew.vtf" )
+resource.AddFile( "materials/gui/scoreboard_headernew.vtf" )
 resource.AddFile( "materials/gui/scoreboard_headernew.vmt" )
 resource.AddFile( "materials/gui/scoreboard_middle.vtf" )
 resource.AddFile( "materials/gui/scoreboard_middle.vmt" )
@@ -23,9 +23,9 @@ PLUGIN.Description = "Default custom scoreboard."
 PLUGIN.Author = "Overv"
 
 if ( CLIENT ) then
-	PLUGIN.TexHeader = surface.GetTextureID( "gui/scoreboard_header" )
+	PLUGIN.TexHeader = surface.GetTextureID( "gui/scoreboard_headernew" )
 	PLUGIN.TexMiddle = surface.GetTextureID( "gui/scoreboard_middle" )
-	PLUGIN.TexBottom = surface.GetTextureID( "gui/scoreboard_bottom" )
+	PLUGIN.TexBottom = surface.GetTextureID( "gui/scoreboard_bottomnew" )
 	PLUGIN.TexPing = surface.GetTextureID( "gui/scoreboard_ping" )
 	PLUGIN.TexFrags = surface.GetTextureID( "gui/scoreboard_frags" )
 	PLUGIN.TexDeaths = surface.GetTextureID( "gui/scoreboard_skull" )
