@@ -2,26 +2,26 @@
 	Tab with player commands
 -------------------------------------------------------------------------------------------------------------------------*/
 
+include( "tab_players_controls.lua" )
+
 local TAB = {}
 TAB.Title = "Players"
 TAB.Description = "Manage players on the server."
-TAB.Icon = "icon16/user.png"
-TAB.Author = "Overv, GeneralWrex"
+TAB.Icon = "gui/silkicons/user"
+TAB.Author = "Overv"
 TAB.Privileges = { "Player menu" }
 TAB.Width = 260
-TAB.Sort = 2
 
 function TAB:Initialize( pnl )
 	// Create the player list
 	self.PlayerList = vgui.Create( "EvolvePlayerList", pnl )
 	self.PlayerList:SetPos( 0, 0 )
 	self.PlayerList:SetSize( self.Width, pnl:GetParent():GetTall() - 58 )
-	self.PlayerList:AddColumn("Connected Players")
-	--self.PlayerList:SetMultiple( true )
+	self.PlayerList:SetMultiple( true )
 	
 	// Create the plugin buttons	
 	self.ButKick = vgui.Create( "EvolveButton", pnl )
-	self.ButKick:SetPos( 0, pnl:GetParent():GetTall() - 59 )
+	self.ButKick:SetPos( 0, pnl:GetParent():GetTall() - 53 )
 	self.ButKick:SetSize( 56, 22 )
 	self.ButKick:SetButtonText( "Kick" )
 	self.ButKick.DoClick = function()
@@ -37,7 +37,7 @@ function TAB:Initialize( pnl )
 	end
 	
 	self.ButBan = vgui.Create( "EvolveButton", pnl )
-	self.ButBan:SetPos( self.ButKick:GetWide() + 5, pnl:GetParent():GetTall() - 59 )
+	self.ButBan:SetPos( self.ButKick:GetWide() + 5, pnl:GetParent():GetTall() - 53 )
 	self.ButBan:SetSize( 64, 22 )
 	self.ButBan:SetButtonText( "Ban" )
 	self.ButBan.DoClick = function()
@@ -53,7 +53,7 @@ function TAB:Initialize( pnl )
 	end
 	
 	self.ButPlugins = vgui.Create( "EvolveButton", pnl )
-	self.ButPlugins:SetPos( self.ButKick:GetWide() + self.ButPlugins:GetWide() + 10, pnl:GetParent():GetTall() - 59 )
+	self.ButPlugins:SetPos( self.ButKick:GetWide() + self.ButPlugins:GetWide() + 10, pnl:GetParent():GetTall() - 53 )
 	self.ButPlugins:SetSize( self.Width - 10 - self.ButKick:GetWide() - self.ButPlugins:GetWide(), 22 )
 	self.ButPlugins:SetButtonText( "Plugins" )
 	self.ButPlugins:SetNotHighlightedColor( 50 )
