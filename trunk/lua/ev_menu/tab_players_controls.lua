@@ -1,15 +1,8 @@
-
-
-
-
 /*-------------------------------------------------------------------------------------------------------------------------
 	Stylish button
 -------------------------------------------------------------------------------------------------------------------------*/
 
 if ( CLIENT ) then
-
---recreating fronts removed from gmod13 ~MadDog
-surface.CreateFont( "Verdana", 13, 0, true, true, "MenuItem" )
 
 PANEL = {}
 
@@ -25,7 +18,7 @@ function PANEL:GetButtonText()
 	return self.Text
 end
 
-function PANEL:Paint(w,h)
+function PANEL:Paint()
 	local col = self.NotHighlightedColor or 81
 	if ( self.Highlight ) then col = self.HighlightedColor or 120 end
 	draw.RoundedBox( 2, 0, 0, self:GetWide(), self:GetTall(), Color( col, col, col, 255 ) )
@@ -56,12 +49,10 @@ derma.DefineControl( "EvolveButton", "Stylish menu button", PANEL, "DButton" )
 
 PANEL = {}
 
-
-
-local iconUser = "icon16/user"
+local iconUser = surface.GetTextureID( "gui/silkicons/user" )
 
 function PANEL:AddPlayer( ply )
-	local item = self:AddLine( "" )
+	local item = self:AddItem( "" )
 	
 	item:SetTall( 25 )
 		
@@ -69,8 +60,8 @@ function PANEL:AddPlayer( ply )
 	
 	item.Avatar = vgui.Create( "AvatarImage", item )
 	item.Avatar:SetPlayer( ply )
-	item.Avatar:SetPos( 2, 1 )
-	item.Avatar:SetSize( 16, 16 )
+	item.Avatar:SetPos( 4, 4 )
+	item.Avatar:SetSize( 17, 17 )
 	
 	item.PaintOver = function()
 		if ( !ValidEntity( item.Player ) ) then
@@ -85,15 +76,15 @@ function PANEL:AddPlayer( ply )
 			return
 		end
 		
-		--if ( evolve.ranks[ ply:EV_GetRank() ] ) then
-		--	surface.SetTexture( evolve.ranks[ ply:EV_GetRank() ].IconTexture )
-		--else
-		--	surface.SetTexture( iconUser )
-		--end
-		--surface.SetDrawColor( 255, 255, 255, 255 )
-		--surface.DrawTexturedRect( item:GetWide() - 22, 0, 16, 16 )
+		if ( evolve.ranks[ ply:EV_GetRank() ] ) then
+			surface.SetTexture( evolve.ranks[ ply:EV_GetRank() ].IconTexture )
+		else
+			surface.SetTexture( iconUser )
+		end
+		surface.SetDrawColor( 255, 255, 255, 255 )
+		surface.DrawTexturedRect( item:GetWide() - 20, 4, 16, 16 )
 		
-		draw.SimpleText( ply:Nick() or "", "DermaDefault", 28, 3, Color( 0, 0, 0, 255 ) )
+		draw.SimpleText( ply:Nick() or "", "Default", 28, 5, Color( 0, 0, 0, 255 ) )
 	end
 	
 	item.OnMousePressedOld = item.OnMousePressed
@@ -111,19 +102,19 @@ function PANEL:AddPlayer( ply )
 end
 
 function PANEL:SelectFirstItem()
-	self:SelectFirstItem( )
+	self:SelectItem( self:GetItems()[1] )
 end
 
 function PANEL:GetSelectedPlayers()
 	local plys = {}
-	for _, item in pairs( self:GetSelected( ) ) do if ( ValidEntity( item.Player ) ) then table.insert( plys, item.Player:Nick() ) end end
+	for _, item in pairs( self:GetSelectedItems() ) do if ( ValidEntity( item.Player ) ) then table.insert( plys, item.Player:Nick() ) end end
 	return plys
 end
 
 function PANEL:Populate()
 	local selectedPlayers = {}
-	if ( #self:GetSelected() > 0 ) then
-		for _, item in ipairs( self:GetSelected() ) do
+	if ( #self:GetSelectedItems() > 0 ) then
+		for _, item in ipairs( self:GetSelectedItems() ) do
 			if ( IsValid( item.Player ) ) then table.insert( selectedPlayers, item.Player ) end
 		end
 	end
@@ -153,12 +144,12 @@ function PANEL:Populate()
 		end
 	end
 	
-	if ( #self:GetSelected() == 0 ) then
-		self:GetLine(1)
+	if ( #self:GetSelectedItems() == 0 ) then
+		self:SelectFirstItem()
 	end
 end
 
-derma.DefineControl( "EvolvePlayerList", "Stylish player list", PANEL, "DListView" )
+derma.DefineControl( "EvolvePlayerList", "Stylish player list", PANEL, "DComboBox" )
 
 /*-------------------------------------------------------------------------------------------------------------------------
 	Tool menu button
@@ -187,7 +178,7 @@ function PANEL:RemoveEx()
 	self:Remove()
 end
 
-function PANEL:Paint(w,h)
+function PANEL:Paint()
 	if ( !self.m_bSelected ) then
 		if ( !self.m_bAlt ) then return end
 		surface.SetDrawColor( 255, 255, 255, 10 )

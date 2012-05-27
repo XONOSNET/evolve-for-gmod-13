@@ -1,9 +1,3 @@
---[[
-
-	Fixed by MadDog
-	May 2012
-]]
-
 /*-------------------------------------------------------------------------------------------------------------------------
 	Restriction
 -------------------------------------------------------------------------------------------------------------------------*/
@@ -50,18 +44,14 @@ function PLUGIN:PlayerCanPickupWeapon( ply, wep )
 	end
 end
 
-function PLUGIN:Initialize()
-	if CLIENT then return end
-
-	evolve:LoadRanks()
-
+function PLUGIN:Initialize()	
 	// Weapons
 	local weps = {}
-
+	
 	for _, wep in pairs( weapons.GetList() ) do
 		table.insert( weps, "@" .. wep.ClassName )
 	end
-
+	
 	table.Add( weps, {
 		"@weapon_crowbar",
 		"@weapon_pistol",
@@ -75,67 +65,65 @@ function PLUGIN:Initialize()
 		"@weapon_ar2",
 		"@weapon_physgun",
 	} )
-
+	
 	table.Add( evolve.privileges, weps )
-
-	// Entities
+	
+	// Entities	
 	local entities = {}
-
+	
 	for class, ent in pairs( scripted_ents.GetList() ) do
 		if ( ent.t.Spawnable or ent.t.AdminSpawnable ) then
 			table.insert( entities, ":" .. ( ent.ClassName or class ) )
 		end
 	end
-
+	
 	table.Add( evolve.privileges, entities )
-
+	
 	// Tools
 	local tools = {}
-
+	
 	if ( GAMEMODE.IsSandboxDerived ) then
-		for _, val in ipairs( file.Find( "weapons/gmod_tool/stools/*.lua", LUA_PATH )  ) do
+		for _, val in ipairs( file.FindInLua( "weapons/gmod_tool/stools/*.lua" )  ) do
 			local _, __, class = string.find( val, "([%w_]*)\.lua" )
 			table.insert( tools, "#" .. class )
 		end
 	end
-
+	
 	table.Add( evolve.privileges, tools )
-
-	--this table is kept so when new entities/tools are added they get added to every rank
-	if ( file.Exists( "ev_allentitiescache.txt", "DATA" ) ) then
-		evolve.allentities = glon.decode( file.Read( "ev_allentitiescache.txt", "DATA" ) )
-	else
-		evolve.allentities = {}
+	
+	// If this is the first time the restriction plugin runs, add all weapon and entity privileges to all ranks so it doesn't break anything
+	if ( !evolve:GetGlobalVar( "RestrictionSetUp", false ) ) then		
+		for id, rank in pairs( evolve.ranks ) do
+			if ( id != "owner" ) then
+				table.Add( rank.Privileges, weps )
+			end
+		end
+		
+		evolve:SetGlobalVar( "RestrictionSetUp", true )
+		evolve:SaveRanks()
 	end
-
-	for id, rank in pairs( evolve.ranks ) do
-		if ( id == "owner" ) then continue; end
-
-		for id,name in pairs(weps) do
-			if !table.HasValue(evolve.allentities, name) then
-				table.insert( rank.Privileges, name )
-				table.insert( evolve.allentities, name)
+	
+	if ( !evolve:GetGlobalVar( "RestrictionSetUpEnts", false ) ) then		
+		for id, rank in pairs( evolve.ranks ) do
+			if ( id != "owner" ) then
+				table.Add( rank.Privileges, entities )
 			end
 		end
-
-		for id,name in pairs(entities) do
-			if !table.HasValue(evolve.allentities, name) then
-				table.insert( rank.Privileges, name )
-				table.insert( evolve.allentities, name)
-			end
-		end
-
-		for id,name in pairs(tools) do
-			if !table.HasValue(evolve.allentities, name) then
-				table.insert( rank.Privileges, name )
-				table.insert( evolve.allentities, name)
-			end
-		end
+		
+		evolve:SetGlobalVar( "RestrictionSetUpEnts", true )
+		evolve:SaveRanks()
 	end
-
-	file.Write( "ev_allentitiescache.txt", glon.encode( evolve.allentities ) )
-
-	evolve:SaveRanks()
+	
+	if ( !evolve:GetGlobalVar( "RestrictionSetUpTools2", false ) ) then		
+		for id, rank in pairs( evolve.ranks ) do
+			if ( id != "owner" ) then
+				table.Add( rank.Privileges, tools )
+			end
+		end
+		
+		evolve:SetGlobalVar( "RestrictionSetUpTools2", true )
+		evolve:SaveRanks()
+	end
 end
 
 evolve:RegisterPlugin( PLUGIN )
