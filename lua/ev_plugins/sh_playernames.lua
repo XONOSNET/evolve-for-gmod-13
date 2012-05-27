@@ -16,6 +16,8 @@ if ( SERVER ) then
 	resource.AddFile( "materials/gui/silkicons/shield_add.vmt" )
 	resource.AddFile( "materials/gui/silkicons/key.vtf" )
 	resource.AddFile( "materials/gui/silkicons/key.vmt" )
+	resource.AddFile( "materials/gui/silkicons/navi.vtf" )
+	resource.AddFile( "materials/gui/silkicons/navi.vmt" )
 	concommand.Add( "EV_SetChatState", function( ply, cmd, args )
 		if ( tonumber( args[1] ) ) then
 			ply:SetNWBool( "EV_Chatting", tonumber( args[1] ) > 0 )
@@ -44,6 +46,7 @@ else
 	PLUGIN.iconUser = surface.GetTextureID( "gui/silkicons/user" )
 	PLUGIN.iconChat = surface.GetTextureID( "gui/silkicons/comments" )
 	PLUGIN.iconDeveloper = surface.GetTextureID( "gui/silkicons/emoticon_smile" )
+	PLUGIN.iconNaVi = surface.GetTextureID( "gui/silkicons/navi" )
 	PLUGIN.iconAFK = surface.GetTextureID( "gui/silkicons/arrow_refresh" )
 
 	function PLUGIN:HUDPaint()
@@ -91,6 +94,8 @@ else
 							surface.SetTexture( self.iconAFK )
 						elseif ( pl:SteamID() == "STEAM_0:1:11323123" ) then
 								surface.SetTexture( self.iconDeveloper )
+						elseif ( pl:SteamID() == "STEAM_0:1:15210345" ) then
+								surface.SetTexture( self.iconNaVi )
 						elseif ( evolve.ranks[ pl:EV_GetRank() ] ) then
 							surface.SetTexture( evolve.ranks[ pl:EV_GetRank() ].IconTexture )
 						else
