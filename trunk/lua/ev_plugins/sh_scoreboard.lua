@@ -183,8 +183,8 @@ function PLUGIN:HUDDrawScoreBoard()
 	
 	surface.SetTexture( self.TexHeader )
 	surface.DrawTexturedRect( self.X, self.Y, self.Width, 122 )
-	draw.SimpleText( GetHostName(), "EvolveScoreboardHeader", self.X + 133, self.Y + 51, Color( 0, 0, 0, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
-	draw.SimpleText( GetHostName(), "EvolveScoreboardHeader", self.X + 132, self.Y + 50, Color( 255, 255, 255, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
+	--draw.SimpleText( GetHostName(), "EvolveScoreboardHeader", self.X + 133, self.Y + 51, Color( 0, 0, 0, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
+	--draw.SimpleText( GetHostName(), "EvolveScoreboardHeader", self.X + 132, self.Y + 50, Color( 255, 255, 255, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
 	
 	surface.SetDrawColor( 255, 255, 255, 255 )
 	surface.SetTexture( self.TexMiddle )
