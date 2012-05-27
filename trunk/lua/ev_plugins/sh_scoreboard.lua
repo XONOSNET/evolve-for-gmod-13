@@ -2,12 +2,12 @@
 	Default custom scoreboard
 -------------------------------------------------------------------------------------------------------------------------*/
 
-resource.AddFile( "materials/gui/scoreboard_header.vtf" )
-resource.AddFile( "materials/gui/scoreboard_header.vmt" )
+resource.AddFile( "materials/gui/scoreboard_headerbew.vtf" )
+resource.AddFile( "materials/gui/scoreboard_headernew.vmt" )
 resource.AddFile( "materials/gui/scoreboard_middle.vtf" )
 resource.AddFile( "materials/gui/scoreboard_middle.vmt" )
-resource.AddFile( "materials/gui/scoreboard_bottom.vtf" )
-resource.AddFile( "materials/gui/scoreboard_bottom.vmt" )
+resource.AddFile( "materials/gui/scoreboard_bottomnew.vtf" )
+resource.AddFile( "materials/gui/scoreboard_bottomnew.vmt" )
 resource.AddFile( "materials/gui/scoreboard_ping.vtf" )
 resource.AddFile( "materials/gui/scoreboard_ping.vmt" )
 resource.AddFile( "materials/gui/scoreboard_frags.vtf" )
