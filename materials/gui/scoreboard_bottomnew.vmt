@@ -1,6 +1,6 @@
 "UnlitGeneric"
 {
-	"$basetexture" "gui/scoreboard_bottom"
+	"$basetexture" "gui/scoreboard_bottomnew"
 	"$ignorez"	1
 	"$vertexcolor" 	1
 	"$vertexalpha" 	1
