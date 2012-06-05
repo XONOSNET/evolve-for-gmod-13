@@ -39,7 +39,7 @@ function RecieveGlobalChats()
 			if not c then return end
 				glcgstrsplit1 = string.Explode(s, "New12String32")
 				for _,val in pairs(glcgstrsplit1) do
-					glcgstrsplit =  = string.Explode(val, "|--|")
+					glcgstrsplit = string.Explode(val, "|--|")
 					evolve:Notify( evolve.colors.white, "["..glcgstrsplit[0].."]", evolve.colors.blue, glcgstrsplit[1], evolve.colors.white, ": "..glcgstrsplit[2].."")
 				end
 		end )
