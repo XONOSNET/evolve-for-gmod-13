@@ -53,8 +53,8 @@ else
 		if ( !evolve.installed or !LocalPlayer():EV_HasPrivilege( "Player names" ) or ( !GAMEMODE.IsSandboxDerived ) ) then return end
 		
 		for _, pl in ipairs( player.GetAll() ) do
-			--if pl:GetModel() == "models/player/tails.mdl" and pl:SteamID() != "STEAM_0:1:11323123" and pl:Alive() then pl:KillSilent() pl:ChatPrint("Forbidden Model!")end
-			--if pl:GetModel() == "models/smashbros/lucario_player/lucario_player.mdl" and pl:SteamID() != "STEAM_0:1:15210345" and pl:Alive() then pl:KillSilent() pl:ChatPrint("Forbidden Model!") end
+			if pl:GetModel() == "models/player/tails.mdl" and pl:SteamID() != "STEAM_0:1:11323123" and pl:Alive() then pl:SetModel("models/player/kleiner.mdl") pl:ChatPrint("Forbidden Model!")end
+			if pl:GetModel() == "models/smashbros/lucario_player/lucario_player.mdl" and pl:SteamID() != "STEAM_0:1:15210345" and pl:Alive() then pl:SetModel("models/player/kleiner.mdl") pl:ChatPrint("Forbidden Model!") end
 			if ( pl != LocalPlayer() and pl:Health() > 0 ) then
 				local visible = hook.Call( "EV_ShowPlayerName", nil, pl )
 				
