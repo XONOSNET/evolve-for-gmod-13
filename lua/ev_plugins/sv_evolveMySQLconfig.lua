@@ -2,10 +2,10 @@ print("-----> Starting Evolve MySQL Plugin <-----")
 Evolve_SQLConf = {} 
 
 Evolve_SQLConf.EnableMySQL = true 
-Evolve_SQLConf.Host = "62.141.38.149" 
-Evolve_SQLConf.Username = "gcgmod" 			
-Evolve_SQLConf.Password = "sc5m84." 	
-Evolve_SQLConf.Database_name = "gcgmod" 
+Evolve_SQLConf.Host = "ag-community.de" 
+Evolve_SQLConf.Username = "user_evolve" 			
+Evolve_SQLConf.Password = "agc1337evolve" 	
+Evolve_SQLConf.Database_name = "evolve" 
 Evolve_SQLConf.Database_port = 3306
 
 /*---------------------------------------------------------------------------
@@ -105,5 +105,6 @@ DB.ConnectToMySQL(Evolve_SQLConf.Host, Evolve_SQLConf.Username, Evolve_SQLConf.P
 function DB.Init()
 	DB.Begin()
 		DB.Query("CREATE TABLE IF NOT EXISTS `globalchat` (`id` bigint(20) NOT NULL AUTO_INCREMENT,`time` bigint(20) NOT NULL,`site` varchar(50) NOT NULL,`user` varchar(50) NOT NULL,`text` mediumtext NOT NULL,`sentBuild` int(11) NOT NULL DEFAULT '0',`sentTTT` int(11) NOT NULL DEFAULT '0',`sentStronghold` int(11) NOT NULL DEFAULT '0',`sentMC` int(11) NOT NULL DEFAULT '0',PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;")
+		DB.Query("CREATE TABLE IF NOT EXISTS `bans` (`SteamID` varchar(255) NOT NULL,`Name` varchar(255) NOT NULL,`UnBan` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',`Ban` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,`Reason` mediumtext NOT NULL,`ServerIP` varchar(255) NOT NULL,`Admin` varchar(255) NOT NULL,`id` bigint(20) NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")
 	DB.Commit()
 end
