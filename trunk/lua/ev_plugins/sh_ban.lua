@@ -22,6 +22,7 @@ function PLUGIN:Call( ply, args )
 		local uid, pl
 		
 		if ( string.match( args[1] or "", "STEAM_[0-5]:[0-9]:[0-9]+" ) ) then
+			userSteam = args[1]
 			uid = evolve:UniqueIDByProperty( "SteamID", args[1] )
 			pl = player.GetByUniqueID( uid )
 		else
@@ -33,6 +34,7 @@ function PLUGIN:Call( ply, args )
 				return
 			elseif ( #pl == 1 ) then
 				pl = pl[1]
+				userSteam=pl:SteamID()
 				uid = pl:UniqueID()
 			end
 		end
@@ -54,7 +56,9 @@ function PLUGIN:Call( ply, args )
 		local reason = table.concat( args, " ", 3 )
 			if ( #reason == 0 ) then reason = "No reason specified" end
 		local nick = evolve:GetProperty( uid, "Nick" )
-		
+		local unbantime = os.time() + lenght
+		local serverip = GetConVarString("ip")..":"..GetConVarString("hostport")
+		DB.Query("INSERT INTO `bans` (`SteamID`, `Name`, `UnBan`, `Ban`, `Reason`, `ServerIP`, `Admin`) VALUES ('"..userSteam.."', '"..nick.."', '"..unbantime.."', '"..os.time().."', '"..reason.."', '"..serverip.."', '"..ply:Nick().."');")
 		evolve:Ban( uid, length, reason, ply:UniqueID() )
 		
 		if ( length == 0 ) then
