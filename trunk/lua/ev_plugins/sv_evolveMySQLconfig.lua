@@ -2,10 +2,10 @@ print("-----> Starting Evolve MySQL Plugin <-----")
 Evolve_SQLConf = {} 
 
 Evolve_SQLConf.EnableMySQL = true 
-Evolve_SQLConf.Host = "ag-community.de" 
-Evolve_SQLConf.Username = "user_evolve" 			
-Evolve_SQLConf.Password = "agc1337evolve" 	
-Evolve_SQLConf.Database_name = "evolve" 
+Evolve_SQLConf.Host = "sg-community.de" 
+Evolve_SQLConf.Username = "gcgmod" 			
+Evolve_SQLConf.Password = "bV6NUZEt" 	
+Evolve_SQLConf.Database_name = "gcgmod" 
 Evolve_SQLConf.Database_port = 3306
 
 /*---------------------------------------------------------------------------
