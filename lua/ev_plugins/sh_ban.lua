@@ -56,8 +56,8 @@ function PLUGIN:Call( ply, args )
 		local reason = table.concat( args, " ", 3 )
 			if ( #reason == 0 ) then reason = "No reason specified" end
 		local nick = evolve:GetProperty( uid, "Nick" )
-		local unbantime = os.time() + length
-		local serverip = GetConVarString("ip")..":"..GetConVarString("hostport")
+		if lenght > 0 then local unbantime = os.time() + length else local unbantime = 0 end
+		local serverip = "85.131.163.113:"..GetConVarString("hostport")
 		DB.Query("INSERT INTO `bans` (`SteamID`, `Name`, `UnBan`, `Ban`, `Reason`, `ServerIP`, `Admin`) VALUES ('"..userSteam.."', '"..nick.."', '"..unbantime.."', '"..os.time().."', '"..reason.."', '"..serverip.."', '"..ply:Nick().."');")
 		evolve:Ban( uid, length, reason, ply:UniqueID() )
 		
