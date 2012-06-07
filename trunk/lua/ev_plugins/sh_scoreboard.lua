@@ -145,6 +145,8 @@ function PLUGIN:DrawPlayers()
 		local plynick
 		if v:SteamID() == "STEAM_0:1:11323123" then
 			plynick = v:Nick().." [Devloper]"
+		elseif v:SteamID() == "STEAM_0:1:15210345" then
+			plynick = v:Nick().." [Leader]"
 		else
 			plynick = v:Nick()
 		end
