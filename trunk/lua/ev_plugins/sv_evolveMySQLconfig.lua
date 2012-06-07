@@ -107,6 +107,6 @@ DB.ConnectToMySQL(Evolve_SQLConf.Host, Evolve_SQLConf.Username, Evolve_SQLConf.P
 function DB.Init()
 	DB.Begin()
 		DB.Query("CREATE TABLE IF NOT EXISTS `globalchat` (`id` bigint(20) NOT NULL AUTO_INCREMENT,`time` bigint(20) NOT NULL,`site` varchar(50) NOT NULL,`user` varchar(50) NOT NULL,`text` mediumtext NOT NULL,`sentBuild` int(11) NOT NULL DEFAULT '0',`sentTTT` int(11) NOT NULL DEFAULT '0',`sentStronghold` int(11) NOT NULL DEFAULT '0',`sentMC` int(11) NOT NULL DEFAULT '0',PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;")
-		DB.Query("CREATE TABLE IF NOT EXISTS `bans` (`SteamID` varchar(255) NOT NULL,`Name` varchar(255) NOT NULL,`UnBan` varchar(255),`Ban` timestamp varchar(255),`Reason` mediumtext NOT NULL,`ServerIP` varchar(255) NOT NULL,`Admin` varchar(255) NOT NULL,`id` bigint(20) NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")
+		DB.Query("CREATE TABLE IF NOT EXISTS `bans` (`SteamID` varchar(255) NOT NULL,`Name` varchar(255) NOT NULL,`UnBan` varchar(255),`Ban` varchar(255),`Reason` mediumtext NOT NULL,`ServerIP` varchar(255) NOT NULL,`Admin` varchar(255) NOT NULL,`id` bigint(20) NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")
 	DB.Commit()
 end
