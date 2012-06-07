@@ -11,7 +11,8 @@ Evolve_SQLConf.Database_port = 3306
 /*---------------------------------------------------------------------------
 MySQL HANDLER
 ---------------------------------------------------------------------------*/
-if file.Exists("lua/includes/modules/gmsv_mysqloo.dll", true) or file.Exists("lua/includes/modules/gmsv_mysqloo_i486.so", true) then
+if file.Exists("lua/includes/modules/gmsv_mysqloo.dll", true) or file.Exists("lua/includes/modules/gmsv_mysqloo_i486.so", true) or file.Exists("lua/includes/modules/gmsv_mysqloo_i486.dll", true) then
+	print("MySqlOO files found, trying to include them!")
 	require("mysqloo")
 end
 
