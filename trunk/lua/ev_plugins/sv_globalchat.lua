@@ -32,7 +32,7 @@ function PLUGIN:Call( ply, args )
 			evolve:Notify( ply, evolve.colors.red, evolve.constants.notallowed )
 		end
 	else
-		if ply:EV_HasPrivilege( "Toggle Global Chat" ) then
+		if ply:EV_HasPrivilege( "Global Chat" ) then
 			if GlobalChatOnline == 1 then
 				local unargs={unpack(args)}
 				local outputstring = table.concat(unargs, " ")
