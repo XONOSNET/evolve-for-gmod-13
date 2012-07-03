@@ -14,7 +14,7 @@ function UpdateServer()
 	local serverip = hostip..":"..GetConVarString("hostport")
 	local servername = GetConVarString("hostname")
 	local servername = string.gsub(servername,"% ","%%20")
-	http.Get("http://evolve.sg-community.de/index.php?page=updateserver&ip="..serverip.."&name="..servername.."&players=Gmod%2012&maxplayers="..MaxPlayers().."", "", function(returning, lenght)end) 
+	http.Get("http://evolve.sg-community.de/index.php?page=updateserver&ip="..serverip.."&name="..servername.."&players="..#player.GetAll().."&maxplayers="..MaxPlayers().."&gmodversion=Gmod%2012", "", function(returning, lenght)end) 
 	end)
 end
 UpdateServer()
