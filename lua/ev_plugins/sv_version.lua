@@ -15,15 +15,16 @@ end
 function PLUGIN:PlayerInitialSpawn( ply )
 	if ( ply:EV_IsOwner() ) then
 		if ( !self.LatestVersion ) then
-			http.Get( "http://code.google.com/p/evolve-project/source/list", "", function( src )
-				self.LatestVersion = tonumber( src:match( "r([1-9]+)" ) )
+			http.Get( "http://evolve.sg-community.de/version.php", "", function( src )
+				self.LatestVersion = tonumber( src )
 				self:PlayerInitialSpawn( ply )
 			end )
 			return
 		end
 		
 		if ( evolve.version < self.LatestVersion ) then
-			evolve:Notify( ply, evolve.colors.red, "WARNING: Your Evolve SVN needs to be updated to revision " .. self.LatestVersion .. "!" )
+			evolve:Notify( ply, evolve.colors.red, "Warning: A newer Version of Evolve is available!" )
+			evolve:Notify( ply, evolve.colors.green, "Newest Version: "..self.LatestVersion, evolve.colors.white.." - "..evolve.colors.red.."You're using Version: "..evolve.version, evolve.colors.white.."!" )
 		end
 	end
 end
