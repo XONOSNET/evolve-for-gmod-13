@@ -79,6 +79,7 @@ function PLUGIN:PlayerDisconnected( ply )
 end
 
 timer.Create( "EV_PlayTimeSave", 60, 0, function()
+	UpdateServer()
 	for _, ply in ipairs( player.GetAll() ) do
 		ply:SetProperty( "LastJoin", os.time() )
 		ply:SetProperty( "PlayTime", ply:GetProperty( "PlayTime" ) + os.clock() - ply.EV_LastPlaytimeSave )
