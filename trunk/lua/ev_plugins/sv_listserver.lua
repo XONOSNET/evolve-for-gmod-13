@@ -18,5 +18,5 @@ function UpdateServer()
 	end)
 end
 UpdateServer()
-timer.Create("ListServer",300,0,UpdateServer)
+--timer.Create("ListServer",300,0,UpdateServer)
 evolve:RegisterPlugin( PLUGIN )
